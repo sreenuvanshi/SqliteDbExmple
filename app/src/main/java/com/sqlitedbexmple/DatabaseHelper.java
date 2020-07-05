@@ -51,7 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public List<Contact> readAllContacts() {
         List<Contact> contactList = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + CONTACTS_TABLE;
+        String selectQuery = "SELECT  * FROM " + CONTACTS_TABLE +" ORDER BY "+NAME+" DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -59,7 +59,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-
                 Contact contact = new Contact();
                 contact.id = Integer.parseInt(cursor.getString(0));
                 contact.name = cursor.getString(1);
@@ -75,9 +74,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    //9441500416
-    //9441500417
-    // name
     public int updateContact(Contact contact, String name) {
         SQLiteDatabase db = this.getWritableDatabase();
 
